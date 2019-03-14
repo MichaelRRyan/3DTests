@@ -63,6 +63,18 @@ void Cube3D::update()
 		MyVector3 tempPos = m_points[i] - m_centre;
 		tempPos = MyMatrix3::rotationX(m_rotation.x) * MyMatrix3::rotationY(m_rotation.y) * MyMatrix3::rotationZ(m_rotation.z) * tempPos;
 		tempPos += m_centre;
-		m_currentPosition[i].position = tempPos + m_displacement;
+		tempPos += m_displacement;
+
+		// Add perspective
+		MyVector3 screen_middle = { 400.0,300.0,0.0 };
+
+		MyVector3 perspectiveMovement = screen_middle - tempPos;
+
+		perspectiveMovement.z = 0.0;
+		perspectiveMovement = perspectiveMovement.unit();
+
+		tempPos += perspectiveMovement * (tempPos.z / 10);
+
+		m_currentPosition[i].position = tempPos;
 	}
 }

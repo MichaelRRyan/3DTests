@@ -55,72 +55,223 @@ void Game::update(sf::Time t_deltaTime)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		m_cube.m_displacement.x += 4.0;
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_displacement.x += 4.0;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		m_cube.m_displacement.x -= 4.0;
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_displacement.x -= 4.0;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		m_cube.m_displacement.y -= 4.0;
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_displacement.y -= 4.0;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		m_cube.m_displacement.y += 4.0;
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_displacement.y += 4.0;
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+	{
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_displacement.z += 4.0;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
+	{
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_displacement.z -= 4.0;
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_rotation.x += 0.05;
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_rotation.x -= 0.05;
+		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
-		m_cube.m_rotation.x += 0.05;
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_rotation.y += 0.05;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{
-		m_cube.m_rotation.x -= 0.05;
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_rotation.y -= 0.05;
+		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		m_cube.m_rotation.y += 0.05;
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_rotation.z += 0.05;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		m_cube.m_rotation.y -= 0.05;
+		for (int i = 0; i < NO_CUBES; i++)
+		{
+			m_cubes[i].m_rotation.z -= 0.05;
+		}
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
+	for (int i = 0; i < NO_CUBES; i++)
 	{
-		m_cube.m_rotation.z += 0.05;
+		m_cubes[i].update();
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-	{
-		m_cube.m_rotation.z -= 0.05;
-	}
-
-	m_cube.update();
 }
 
 void Game::render()
 {
 	m_window.clear();
 
-	m_cube.draw(m_window, m_cubes);
+	for (int i = 0; i < NO_CUBES; i++)
+	{
+		m_cubes[i].draw(m_window, m_renderCubes);
+	}
 
 	m_window.display();
 }
 
 void Game::setupShapes()
 {
-	m_cube.m_points[0] = { 200.0,200.0,0.0 };
-	m_cube.m_points[1] = { 300.0,200.0,0.0 };
-	m_cube.m_points[2] = { 300.0,300.0,0.0 };
-	m_cube.m_points[3] = { 200.0,300.0,0.0 };
-	m_cube.m_points[4] = { 200.0,200.0,100.0 };
-	m_cube.m_points[5] = { 300.0,200.0,100.0 };
-	m_cube.m_points[6] = { 300.0,300.0,100.0 };
-	m_cube.m_points[7] = { 200.0,300.0,100.0 };
+	//m_cubes[0].m_points[0] = { 150.0,200.0,0.0 };
+	//m_cubes[0].m_points[1] = { 250.0,200.0,0.0 };
+	//m_cubes[0].m_points[2] = { 250.0,300.0,0.0 };
+	//m_cubes[0].m_points[3] = { 150.0,300.0,0.0 };
+	//m_cubes[0].m_points[4] = { 150.0,200.0,100.0 };
+	//m_cubes[0].m_points[5] = { 250.0,200.0,100.0 };
+	//m_cubes[0].m_points[6] = { 250.0,300.0,100.0 };
+	//m_cubes[0].m_points[7] = { 150.0,300.0,100.0 };
 
-	m_cube.setup();
+	//m_cubes[0].setup();
+	//m_cubes[0].m_centre = { 250.0,250.0,50.0 };
 
-	m_cube.m_centre = { 250.0,250.0,50.0 };
+	//m_cubes[1].m_points[0] = { 210.0,0.0,10.0 };
+	//m_cubes[1].m_points[1] = { 290.0,0.0,10.0 };
+	//m_cubes[1].m_points[2] = { 290.0,200.0,10.0 };
+	//m_cubes[1].m_points[3] = { 210.0,200.0,10.0 };
+	//m_cubes[1].m_points[4] = { 210.0,0.0,90.0 };
+	//m_cubes[1].m_points[5] = { 290.0,0.0,90.0 };
+	//m_cubes[1].m_points[6] = { 290.0,200.0,90.0 };
+	//m_cubes[1].m_points[7] = { 210.0,200.0,90.0 };
+
+	//m_cubes[1].setup();
+	//m_cubes[1].m_centre = { 250.0,250.0,50.0 };
+
+	//// Third shape
+	//m_cubes[2].m_points[0] = { 250.0,200.0,0.0 };
+	//m_cubes[2].m_points[1] = { 350.0,200.0,0.0 };
+	//m_cubes[2].m_points[2] = { 350.0,300.0,0.0 };
+	//m_cubes[2].m_points[3] = { 250.0,300.0,0.0 };
+	//m_cubes[2].m_points[4] = { 250.0,200.0,100.0 };
+	//m_cubes[2].m_points[5] = { 350.0,200.0,100.0 };
+	//m_cubes[2].m_points[6] = { 350.0,300.0,100.0 };
+	//m_cubes[2].m_points[7] = { 250.0,300.0,100.0 };
+
+	//m_cubes[2].setup();
+	//m_cubes[2].m_centre = { 250.0,250.0,50.0 };
+
+	//// forth shape
+	//m_cubes[3].m_points[0] = { 220.0,-100.0,20.0 };
+	//m_cubes[3].m_points[1] = { 280.0,-100.0,20.0 };
+	//m_cubes[3].m_points[2] = { 300.0,0.0,0.0 };
+	//m_cubes[3].m_points[3] = { 200.0,0.0,0.0 };
+	//m_cubes[3].m_points[4] = { 220.0,-100.0,80.0 };
+	//m_cubes[3].m_points[5] = { 280.0,-100.0,80.0 };
+	//m_cubes[3].m_points[6] = { 300.0,0.0,100.0 };
+	//m_cubes[3].m_points[7] = { 200.0,0.0,100.0 };
+
+	//m_cubes[3].setup();
+	//m_cubes[3].m_centre = { 250.0,250.0,50.0 };
+
+	m_cubes[0].m_points[0] = { 100.0,50.0,-50.0 }; // front, top, left
+	m_cubes[0].m_points[1] = { 130.0,50.0,-50.0 }; // front, top, left
+	m_cubes[0].m_points[2] = { 130.0,350.0,-50.0 };
+	m_cubes[0].m_points[3] = { 100.0,350.0,-50.0 };
+	m_cubes[0].m_points[4] = { 100.0,50.0,100.0 };
+	m_cubes[0].m_points[5] = { 130.0,50.0,100.0 };
+	m_cubes[0].m_points[6] = { 130.0,350.0,100.0 };
+	m_cubes[0].m_points[7] = { 100.0,350.0,100.0 };
+
+	m_cubes[0].setup();
+	m_cubes[0].m_centre = { 275.0,200.0,25.0 };
+
+	m_cubes[1].m_points[0] = { 420.0,50.0,-50.0 };
+	m_cubes[1].m_points[1] = { 450.0,50.0,-50.0 };
+	m_cubes[1].m_points[2] = { 450.0,350.0,-50.0 };
+	m_cubes[1].m_points[3] = { 420.0,350.0,-50.0 };
+	m_cubes[1].m_points[4] = { 420.0,50.0,100.0 };
+	m_cubes[1].m_points[5] = { 450.0,50.0,100.0 };
+	m_cubes[1].m_points[6] = { 450.0,350.0,100.0 };
+	m_cubes[1].m_points[7] = { 420.0,350.0,100.0 };
+
+	m_cubes[1].setup();
+	m_cubes[1].m_centre = { 275.0,200.0,25.0 };
+
+	// Third shape
+	m_cubes[2].m_points[0] = { 200.0,100.0,-20.0 };
+	m_cubes[2].m_points[1] = { 350.0,100.0,-20.0 };
+	m_cubes[2].m_points[2] = { 350.0,300.0,-20.0 };
+	m_cubes[2].m_points[3] = { 200.0,300.0,-20.0 };
+	m_cubes[2].m_points[4] = { 200.0,100.0,70.0 };
+	m_cubes[2].m_points[5] = { 350.0,100.0,70.0 };
+	m_cubes[2].m_points[6] = { 350.0,300.0,70.0 };
+	m_cubes[2].m_points[7] = { 200.0,300.0,70.0 };
+
+	m_cubes[2].setup();
+	m_cubes[2].m_centre = { 275.0,200.0,25.0 };
+
+	// forth shape
+	m_cubes[3].m_points[0] = { 230.0,0.0,20.0 };
+	m_cubes[3].m_points[1] = { 320.0,0.0,20.0 };
+	m_cubes[3].m_points[2] = { 350.0,100.0,-20.0 };
+	m_cubes[3].m_points[3] = { 200.0,100.0,-20.0 };
+	m_cubes[3].m_points[4] = { 230.0,0.0,70.0 };
+	m_cubes[3].m_points[5] = { 320.0,0.0,70.0 };
+	m_cubes[3].m_points[6] = { 350.0,100.0,70.0 };
+	m_cubes[3].m_points[7] = { 200.0,100.0,70.0 };
+
+	m_cubes[3].setup();
+	m_cubes[3].m_centre = { 275.0,200.0,25.0 };
+
+	// fifth shape
+	m_cubes[4].m_points[0] = { 130.0,200.0,10.0 };
+	m_cubes[4].m_points[1] = { 420.0,200.0,10.0 };
+	m_cubes[4].m_points[2] = { 420.0,300.0,10.0 };
+	m_cubes[4].m_points[3] = { 130.0,300.0,10.0 };
+	m_cubes[4].m_points[4] = { 130.0,200.0,40.0 };
+	m_cubes[4].m_points[5] = { 420.0,200.0,40.0 };
+	m_cubes[4].m_points[6] = { 420.0,300.0,40.0 };
+	m_cubes[4].m_points[7] = { 130.0,300.0,40.0 };
+
+	m_cubes[4].setup();
+	m_cubes[4].m_centre = { 275.0,200.0,25.0 };
 }

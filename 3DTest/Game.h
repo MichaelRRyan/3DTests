@@ -7,6 +7,8 @@
 #include "MyMatrix3.h"
 #include "Cube3D.h"
 
+const int NO_CUBES{ 5 };
+
 class Game
 {
 public:
@@ -27,8 +29,8 @@ private:
 	sf::RenderWindow m_window;
 	bool m_exitGame;
 
-	sf::VertexArray m_cubes{ sf::Lines };
-	Cube3D m_cube;
+	sf::VertexArray m_renderCubes{ sf::Lines };
+	Cube3D m_cubes[NO_CUBES];
 
 };
 
